@@ -5,49 +5,39 @@ export class Drug {
     this.benefit = benefit;
   }
 
+  increaseBenefit(amount) {
+    return Math.min(50, this.benefit + amount);
+  }
+
+  decreaseBenefit(amount) {
+    return Math.max(0, this.benefit - amount);
+  }
+
   updateBenefitValue() {
-    if (this.name != "Herbal Tea" && this.name != "Fervex") {
-      if (this.benefit > 0) {
-        if (this.name != "Magic Pill") {
-          this.benefit = this.benefit - 1;
-        }
-      }
-    } else {
-      if (this.benefit < 50) {
-        this.benefit = this.benefit + 1;
-        if (this.name == "Fervex") {
-          if (this.expiresIn < 11) {
-            if (this.benefit < 50) {
-              this.benefit = this.benefit + 1;
-            }
-          }
-          if (this.expiresIn < 6) {
-            if (this.benefit < 50) {
-              this.benefit = this.benefit + 1;
-            }
-          }
-        }
-      }
+    let { name, expiresIn, benefit } = this;
+
+    expiresIn--;
+
+    switch (name) {
+      case "Fervex":
+        if (expiresIn > 9) benefit = this.increaseBenefit(1);
+        else if (expiresIn > 4) benefit = this.increaseBenefit(2);
+        else if (expiresIn >= 0) benefit = this.increaseBenefit(3);
+        else benefit = 0;
+        break;
+      case "Herbal Tea":
+        if (expiresIn < 0) benefit = this.increaseBenefit(2);
+        else benefit = this.increaseBenefit(1);
+        break;
+      case "Magic Pill":
+        expiresIn++;
+        break;
+      default:
+        if (expiresIn < 0) benefit = this.decreaseBenefit(2);
+        else benefit = this.decreaseBenefit(1);
+        break;
     }
-    if (this.name != "Magic Pill") {
-      this.expiresIn = this.expiresIn - 1;
-    }
-    if (this.expiresIn < 0) {
-      if (this.name != "Herbal Tea") {
-        if (this.name != "Fervex") {
-          if (this.benefit > 0) {
-            if (this.name != "Magic Pill") {
-              this.benefit = this.benefit - 1;
-            }
-          }
-        } else {
-          this.benefit = this.benefit - this.benefit;
-        }
-      } else {
-        if (this.benefit < 50) {
-          this.benefit = this.benefit + 1;
-        }
-      }
-    }
+    this.expiresIn = expiresIn;
+    this.benefit = benefit;
   }
 }

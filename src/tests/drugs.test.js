@@ -1,5 +1,5 @@
 import { createDrugs, updateBenefitMultipleTimes } from "./test-utils";
-import { drugBaseConfig } from "../drugs/config"
+import { drugBaseConfig } from "../drugs/config";
 
 const { maxBenefit, minBenefit } = drugBaseConfig;
 
@@ -30,6 +30,16 @@ describe("Drug", () => {
     });
     it("should not decrease the benefit below the minimum", () => {
       expect(standard.decreaseBenefit(100)).toEqual(minBenefit);
+    });
+  });
+  describe("validateBenefit", () => {
+    it("should throw if benefit is above 50", () => {
+      standard.benefit = 51;
+      expect(() => standard.validateBenefit()).toThrowError();
+    });
+    it("should throw if benefit is below 0", () => {
+      standard.benefit = -1;
+      expect(() => standard.validateBenefit()).toThrowError();
     });
   });
   describe("updateBenefitValue", () => {

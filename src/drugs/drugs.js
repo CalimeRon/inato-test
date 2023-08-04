@@ -17,6 +17,14 @@ export class Drug {
     return Math.max(minBenefit, this.benefit - amount);
   }
 
+  validateBenefit() {
+    const { minBenefit, maxBenefit } = drugBaseConfig;
+    if (this.benefit < minBenefit)
+      throw new Error("Benefit cannot be negative");
+    if (this.benefit > maxBenefit)
+      throw new Error("Benefit cannot be greater than 50");
+  }
+
   updateBenefitValue() {
     let { name, expiresIn, benefit } = this;
 

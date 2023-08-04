@@ -1,4 +1,7 @@
 import { createDrugs, updateBenefitMultipleTimes } from "./test-utils";
+import { drugBaseConfig } from "../drugs/config"
+
+const { maxBenefit, minBenefit } = drugBaseConfig;
 
 describe("Drug", () => {
   let testDrugs;
@@ -17,16 +20,16 @@ describe("Drug", () => {
     it("should increase the benefit", () => {
       expect(standard.increaseBenefit(1)).toEqual(31);
     });
-    it("should not increase the benefit above 50", () => {
-      expect(standard.increaseBenefit(100)).toEqual(50);
+    it("should not increase the benefit above the maximum benefit", () => {
+      expect(standard.increaseBenefit(100)).toEqual(maxBenefit);
     });
   });
   describe("decreaseBenefit", () => {
     it("should decrease the benefit", () => {
       expect(standard.decreaseBenefit(1)).toEqual(29);
     });
-    it("should not decrease the benefit below 0", () => {
-      expect(standard.decreaseBenefit(100)).toEqual(0);
+    it("should not decrease the benefit below the minimum", () => {
+      expect(standard.decreaseBenefit(100)).toEqual(minBenefit);
     });
   });
   describe("updateBenefitValue", () => {

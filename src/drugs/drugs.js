@@ -1,3 +1,5 @@
+import { drugBaseConfig } from "./config";
+
 export class Drug {
   constructor(name, expiresIn, benefit) {
     this.name = name;
@@ -6,11 +8,13 @@ export class Drug {
   }
 
   increaseBenefit(amount) {
-    return Math.min(50, this.benefit + amount);
+    const { maxBenefit } = drugBaseConfig;
+    return Math.min(maxBenefit, this.benefit + amount);
   }
 
   decreaseBenefit(amount) {
-    return Math.max(0, this.benefit - amount);
+    const { minBenefit } = drugBaseConfig;
+    return Math.max(minBenefit, this.benefit - amount);
   }
 
   updateBenefitValue() {

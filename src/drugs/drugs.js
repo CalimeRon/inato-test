@@ -31,6 +31,10 @@ export class Drug {
     expiresIn--;
 
     switch (name) {
+      case "Dafalgan":
+        if (expiresIn < 0) benefit = this.decreaseBenefit(4);
+        else benefit = this.decreaseBenefit(2);
+        break;
       case "Fervex":
         if (expiresIn > 9) benefit = this.increaseBenefit(1);
         else if (expiresIn > 4) benefit = this.increaseBenefit(2);

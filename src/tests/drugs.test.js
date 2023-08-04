@@ -9,12 +9,14 @@ describe("Drug", () => {
   let fervex;
   let herbalTea;
   let magicPill;
+  let dafalgan;
   beforeEach(() => {
     testDrugs = createDrugs();
     standard = testDrugs.standard;
     fervex = testDrugs.fervex;
     herbalTea = testDrugs.herbalTea;
     magicPill = testDrugs.magicPill;
+    dafalgan = testDrugs.dafalgan;
   });
   describe("increaseBenefit", () => {
     it("should increase the benefit", () => {
@@ -96,6 +98,17 @@ describe("Drug", () => {
       it("should not change expiresIn", () => {
         magicPill.updateBenefitValue();
         expect(magicPill.expiresIn).toEqual(15);
+      });
+    });
+    describe("Dafalgan", () => {
+      it("should decrease the benefit by 2 units if not expired", () => {
+        dafalgan.updateBenefitValue();
+        expect(dafalgan.benefit).toEqual(28);
+      });
+      it("should decrease the benefit by 4 units if expired", () => {
+        dafalgan.expiresIn = 0;
+        dafalgan.updateBenefitValue();
+        expect(dafalgan.benefit).toEqual(26);
       });
     });
   });

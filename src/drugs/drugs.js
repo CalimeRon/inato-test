@@ -55,5 +55,6 @@ export class Drug {
     }
     this.expiresIn = expiresIn;
     this.benefit = benefit;
+    this.validateBenefit();
   }
 }

@@ -17,6 +17,7 @@ export class Drug {
     return Math.max(minBenefit, this.benefit - amount);
   }
 
+  // To make sur that the benefits are within the margins
   validateBenefit() {
     const { minBenefit, maxBenefit } = drugBaseConfig;
     if (this.benefit < minBenefit)
@@ -46,6 +47,7 @@ export class Drug {
         else benefit = this.increaseBenefit(1);
         break;
       case "Magic Pill":
+        // Reset the expiresIn that has been globally decreased before
         expiresIn++;
         break;
       default:

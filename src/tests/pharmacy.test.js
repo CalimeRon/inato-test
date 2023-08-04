@@ -89,7 +89,7 @@ describe("Pharmacy", () => {
       );
     });
 
-    it("should only leave herbal tea and magic pill with benefits over a long period of time", () => {
+    it("should only leave Herbal Tea and Magic Pill with benefits over a long period of time", () => {
       const herbal2 = new Drug("Herbal Tea", 2, 50);
       const magic2 = new Drug("Magic Pill", 2, 2);
       pharmacy.drugs.push(herbal2, magic2);
